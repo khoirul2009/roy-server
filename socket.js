@@ -24,10 +24,12 @@ const connect = async (io, os) => {
             freeMemory = os.freemem();
 
             // notif
-            if(load > 80) await instanceBot.sendMessage(1376706953, 'Server warning');
-
+            if(load > 80) await instanceBot.sendMessage(6698184993, 'Warning!! CPU load mencapai threshold');
 
             usedMemory = Number((totalMemory - freeMemory) / 1073741824).toFixed(4);
+
+            if(usedMemory >= 0.6) await instanceBot.sendMessage(6698184993, 'Warning!! Memory load mencapai threshold');
+
             readDisk = await getDataReadPerSecond();
             writeDisk = await getDataWritePerSecond();
             socket.emit('resources', {cpu: load, memory: usedMemory, readDisk: readDisk / 1024, writeDisk: writeDisk});
