@@ -30,7 +30,7 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 
 
 const app = express();
-app.set('port', 3000);
+app.set('port', 3001);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const server = http.createServer(app);
@@ -126,7 +126,7 @@ app.use(loginRoute)
 
 socket();
 
-server.listen(3000, () => {
+server.listen(3001, () => {
     console.log('Magic happens on port ' + app.get('port'));
 });
 
