@@ -75,7 +75,7 @@
         'use strict';
         google.charts.load('current', {'packages': ['corechart']});
         google.charts.setOnLoadCallback(drawChart);
-        let socket = io.connect('http://localhost:3001');
+        let socket = io.connect('http://8.219.68.75:3001/');
         let displayed;
 
         function drawChart() {
