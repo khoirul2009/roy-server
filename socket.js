@@ -24,7 +24,7 @@ const connect = async (io, os) => {
             freeMemory = os.freemem();
 
             // notif
-            // if(load > 80) await instanceBot.sendMessage(1376706953, 'Server warning');
+            if(load > 80) await instanceBot.sendMessage(1376706953, 'Server warning');
 
 
             usedMemory = Number((totalMemory - freeMemory) / 1073741824).toFixed(4);
