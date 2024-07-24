@@ -30,7 +30,11 @@ const connect = async (io, os) => {
 
             if(usedMemory >= 0.6) await instanceBot.sendMessage(6698184993, 'Warning!! Memory load mencapai threshold');
 
+
             readDisk = await getDataReadPerSecond();
+
+            if((readDisk * 1024) >= 100) await instanceBot.sendMessage(6698184993, 'Warning!! Disk load mencapai threshold');
+
             writeDisk = await getDataWritePerSecond();
             socket.emit('resources', {cpu: load, memory: usedMemory, readDisk: readDisk / 1024, writeDisk: writeDisk});
         }, 1000 * 5);
