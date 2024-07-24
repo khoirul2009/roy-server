@@ -4,7 +4,7 @@ import bot from "./bot.js";
 import {exec, spawn} from "child_process";
 import parsePsOutput from "./parse_to_json.js";
 
-const instanceBot = bot('7476500246:AAHYRvfj8elfuqdpYORf6nNI8bJImBpW4nE');
+const instanceBot = bot('7386480459:AAFkCPooUzEZbcso21PRxqTBx0IGC8SCCUc');
 const connect = async (io, os) => {
     let diskW =  await getDataWritePerSecond();
     let diskR =  await getDataReadPerSecond();
