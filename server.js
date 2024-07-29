@@ -18,6 +18,8 @@ import loginRoute from "./routes/login.js"
 import User from "./model/User.js";
 import bcrypt from "bcryptjs";
 import isAuth from "./middleware/is_auth.js";
+import configRoute from "./routes/config.js"
+import Config from "./model/Config.js";
 
 PassportConfig(passport);
 
@@ -72,6 +74,7 @@ app.use(function(req, res, next) {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
     next();
 });
 
@@ -86,14 +89,27 @@ let dataObject = {
 
 async function initUser ()  {
     const user  = await User.findOne({id: 1})
+    const config = await Config.findOne({id: 1});
+
+    if(!config) {
+        const newConfig = new Config({
+            id: 1,
+            botToken: 'bot-token',
+            cpuThreshold: 80,
+            memoryThreshold: 0.8,
+            diskReadThreshold: 100,
+            diskWriteThreshold: 10000
+        });
+
+        await newConfig.save()
+    }
     if(!user) {
         const newUser = new User({
             username: 'admin',
             password: 'admin',
             id: 1,
             name: 'admin'
-        })
-
+        });
         bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {
                 if (err) throw err;
@@ -122,7 +138,8 @@ const topRoute = (req, res) => {
 router.route('/').get(isAuth, indexRoute);
 router.route('/apps-monitor').get(topRoute);
 
-app.use(loginRoute)
+app.use(loginRoute);
+app.use(configRoute);
 
 socket();
 
