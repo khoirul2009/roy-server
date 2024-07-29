@@ -5,13 +5,15 @@ import {exec, spawn} from "child_process";
 import parsePsOutput from "./parse_to_json.js";
 import Config from "./model/Config.js";
 
-const instanceBot = bot('7476500246:AAHYRvfj8elfuqdpYORf6nNI8bJImBpW4nE');
+
 const connect = async (io, os) => {
     let diskW =  await getDataWritePerSecond();
     let diskR =  await getDataReadPerSecond();
     let cpu = await getCpuLoad();
 
     const config = await Config.findOne({id: 1});
+
+    const instanceBot = bot(config.botToken);
 
 
     io.on('connection', async (socket) => {
