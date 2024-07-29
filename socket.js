@@ -121,7 +121,7 @@ async function getCpuLoad() {
 function getPsData() {
     return new Promise((resolve, reject) => {
         // Use `ps` command to get process information sorted by CPU usage
-        exec('ps aux --sort=-%cpu ', (error, stdout, stderr) => { // Include the header line
+        exec('ps aux --sort=-%cpu | head -n 11', (error, stdout, stderr) => { // Include the header line
             if (error) {
                 console.error(`exec error: ${error}`);
                 reject(error);
