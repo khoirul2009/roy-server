@@ -1,5 +1,6 @@
 import express from "express";
 import Config from "../model/Config.js";
+import User from "../model/User.js";
 
 
 const router = express.Router();
@@ -7,13 +8,14 @@ const router = express.Router();
 
 router.get('/config', async (req, res) => {
     const config = await Config.findOne({id: 1})
+    const user = await User.findOne({id: 1});
     return res.render('config.hbs', {
         botToken: config.botToken,
         cpuThreshold: config.cpuThreshold,
         memoryThreshold: config.memoryThreshold,
         diskReadThreshold: config.diskReadThreshold,
         diskWriteThreshold: config.diskWriteThreshold,
-
+        userId: user.id
     });
 })
 

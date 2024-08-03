@@ -47,24 +47,26 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container mt-5">
+    {{#if success_msg}}
+        <div class="alert alert-success">{{success_msg}}</div>
+    {{/if}}
+    {{#if error_msg}}
+        <div class="alert alert-danger">{{error_msg}}</div>
+    {{/if}}
+    {{#if error}}
+        <div class="alert alert-danger">{{error}}</div>
+    {{/if}}
     <div class="row" style="justify-content: space-between">
 
-        <div class="col-lg-6  mt-5 ">
+        <div class="col-lg-6  ">
             <form action="/config" method="post" class="card">
                 <div class="card-header">
                     <h3>Konfigurasi Peringatan</h3>
+
                 </div>
                 <div class="card-body">
-                    {{#if success_msg}}
-                        <div class="alert alert-success">{{success_msg}}</div>
-                    {{/if}}
-                    {{#if error_msg}}
-                        <div class="alert alert-danger">{{error_msg}}</div>
-                    {{/if}}
-                    {{#if error}}
-                        <div class="alert alert-danger">{{error}}</div>
-                    {{/if}}
+
                     <br>
                     <div class="mb-3">
                         <label for="botToken" class="form-label">Bot Token</label>
@@ -99,23 +101,16 @@
             </form>
         </div>
 
-        <div class="col-lg-6  mt-5">
-            <form action="/reset-password/{{user}}" method="post" class="card">
+        <div class="col-lg-6  ">
+            <form action="/reset-password" method="post" class="card">
                 <div class="card-header">
                     <h3>Konfigurasi Password</h3>
                 </div>
                 <div class="card-body">
-                    {{#if success_msg}}
-                        <div class="alert alert-success">{{success_msg}}</div>
-                    {{/if}}
-                    {{#if error_msg}}
-                        <div class="alert alert-danger">{{error_msg}}</div>
-                    {{/if}}
-                    {{#if error}}
-                        <div class="alert alert-danger">{{error}}</div>
-                    {{/if}}
+
                     <br>
                     <div class="mb-3">
+                        <input type="hidden" name="userId" value="{{userId}}">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" placeholder="Masukkan password" class="form-control" id="password"
                                name="password">
